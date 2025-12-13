@@ -18,8 +18,8 @@ public class Main {
             BufferedReader reader = null;
             try {
                 String fileName = "Data_Files/" + months[m] + ".txt";
-                reader = new BufferedReader(new FileReader(fileName));
-                String line;
+                 reader = new BufferedReader(new FileReader(fileName));
+                 String line;
 
                 while ((line = reader.readLine()) != null){
                     String[] parts = line.split(",");
@@ -52,7 +52,28 @@ public class Main {
 
     // ======== 10 REQUIRED METHODS (Students fill these) ========
 
-    public static String mostProfitableCommodityInMonth(int month) {return "DUMMY";}
+    public static String mostProfitableCommodityInMonth(int month) {
+        if (month < 0 || month > 11){
+            return "INVALID_MONTH";
+        }
+
+        int maxProfit = -100000000;
+        int bestCommNum = -1;
+
+        for (int c=0; c<COMMS; c++){
+            int total = 0;
+
+            for (int d=0; d<DAYS; d++){
+                total += profits[month][d][c];
+            }
+
+            if (total > maxProfit){
+                maxProfit = total;
+                bestCommNum = c;
+            }
+        }
+        return commodities[bestCommNum] + " " + maxProfit;
+    }
 
     public static int totalProfitOnDay(int month, int day) {
         return 1234;
