@@ -1,4 +1,6 @@
 // Main.java — Students version
+import java.io.*;
+import java.util.*;
 
 public class Main {
     static final int MONTHS = 12;
@@ -8,16 +10,49 @@ public class Main {
     static String[] months = {"January","February","March","April","May","June",
                               "July","August","September","October","November","December"};
     
+    static int[][][] profits = new int[MONTHS][DAYS][COMMS];
 
     // ======== REQUIRED METHOD LOAD DATA (Students fill this) ========
     public static void loadData() {
+        for (int m=0; m<MONTHS; m++){
+            BufferedReader reader = null;
+            try {
+                String fileName = "Data_Files/" + months[m] + ".txt";
+                reader = new BufferedReader(new FileReader(fileName));
+                String line;
+
+                while ((line = reader.readLine()) != null){
+                    String[] parts = line.split(",");
+                    if (parts.length != 3) continue;
+
+                    int day = Integer.parseInt(parts[0]);
+                    String commodity = parts[1];
+                    int profit = Integer.parseInt(parts[2]);
+
+                    if (day < 1 || day > DAYS) continue;
+
+                    int commIndex = -1;
+                    for (int c=0; c<COMMS; c++){
+                        if (commodities[c].equals(commodity)){
+                            commIndex = c;
+                            break;
+                        }
+                    }
+
+                    if (commIndex == -1) continue;
+
+                    profits[m][day - 1][commIndex] = profit;
+                }
+
+            } catch (Exception e){
+                return;
+            }
+        }
     }
 
     // ======== 10 REQUIRED METHODS (Students fill these) ========
 
-    public static String mostProfitableCommodityInMonth(int month) {
-        return "DUMMY"; 
-    }
+    public static String mostProfitableCommodityInMonth(int month) {return "DUMMY";}
 
     public static int totalProfitOnDay(int month, int day) {
         return 1234;
