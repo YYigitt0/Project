@@ -115,10 +115,30 @@ public class Main {
         return total;
     }
 
-    public static int bestDayOfMonth(int month) { 
-        return 1234; 
+    public static int bestDayOfMonth(int month) {
+        if (month < 0 || month > 11){
+            return -1;
+        }
+
+        int maxProfit = -100000000;
+        int bestDay = 1;
+
+        for (int d=0; d<DAYS; d++){
+            int dayProfit = 0;
+
+            for (int c=0; c<COMMS; c++){
+                dayProfit += profits[month][d][c];
+            }
+
+            if (dayProfit > maxProfit){
+                maxProfit = dayProfit;
+                bestDay = d + 1;
+            }
+        }
+
+        return bestDay;
     }
-    
+
     public static String bestMonthForCommodity(String comm) { 
         return "DUMMY"; 
     }
