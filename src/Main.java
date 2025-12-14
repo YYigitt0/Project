@@ -140,7 +140,33 @@ public class Main {
     }
 
     public static String bestMonthForCommodity(String comm) { 
-        return "DUMMY"; 
+        int commNum = -1;
+        for (int c=0; c<COMMS; c++){
+            if (commodities[c].equals(comm)){
+                commNum = c;
+                break;
+            }
+        }
+        if (commNum == -1){
+            return "INVALID_COMMODITY";
+        }
+
+        int maxProfit = -100000000;
+        int bestMonthNum = 0;
+
+        for (int m=0; m<MONTHS; m++){
+            int monthlyTotal = 0;
+
+            for (int d=0; d<DAYS; d++){
+                monthlyTotal += profits[m][d][commNum];
+            }
+
+            if (monthlyTotal > maxProfit){
+                maxProfit = monthlyTotal;
+                bestMonthNum = m;
+            }
+        }
+        return months[bestMonthNum];
     }
 
     public static int consecutiveLossDays(String comm) { 
