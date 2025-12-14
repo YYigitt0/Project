@@ -85,12 +85,34 @@ public class Main {
         for (int c=0; c<COMMS; c++){
             total += profits[month][day - 1][c];
         }
-        
+
         return total;
     }
 
     public static int commodityProfitInRange(String commodity, int from, int to) {
-        return 1234;
+        if (from < 1 || to > DAYS || from > to) {
+            return -99999;
+        }
+
+        int commNum = -1;
+        for (int c=0; c<COMMS; c++){
+            if (commodities[c].equals(commodity)){
+                commNum = c;
+                break;
+            }
+        }
+        if (commNum == -1){
+            return -99999;
+        }
+
+        int total = 0;
+
+        for (int m=0; m<MONTHS; m++){
+            for (int d=from - 1; d<= to - 1; d++){
+                total += profits[m][d][commNum];
+            }
+        }
+        return total;
     }
 
     public static int bestDayOfMonth(int month) { 
