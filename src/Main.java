@@ -222,7 +222,31 @@ public class Main {
     }
 
     public static int biggestDailySwing(int month) { 
-        return 1234; 
+        if (month < 0 || month >= MONTHS){
+            return -99999;
+        }
+
+        int maxDifference = 0;
+
+        for (int d=0; d<DAYS - 1; d++){
+            int firstDayProfit = 0;
+            int secondDayProfit = 0;
+
+            for (int c=0; c<COMMS; c++){
+                firstDayProfit += profits[month][d][c];
+                secondDayProfit += profits[month][d + 1][c];
+            }
+
+            int difference = secondDayProfit - firstDayProfit;
+            if (difference < 0 ){
+                difference *= -1;
+            }
+
+            if (difference > maxDifference){
+                maxDifference = difference;
+            }
+        }
+        return maxDifference;
     }
     
     public static String compareTwoCommodities(String c1, String c2) { 
