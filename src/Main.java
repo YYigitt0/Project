@@ -281,8 +281,32 @@ public class Main {
         }
     }
     
-    public static String bestWeekOfMonth(int month) { 
-        return "DUMMY"; 
+    public static String bestWeekOfMonth(int month) {
+        if (month < 0 || month >= MONTHS) {
+            return "INVALID_MONTH";
+        }
+
+        int bestWeek = 1;
+        int maxProfit = -100000000;
+
+        for (int w = 0; w < 4; w++) {
+            int weekProfit = 0;
+            int startDay = w * 7;
+            int endDay = startDay + 7;
+
+            for (int d = startDay; d < endDay; d++) {
+                for (int c = 0; c < COMMS; c++) {
+                    weekProfit += profits[month][d][c];
+                }
+            }
+
+            if (weekProfit > maxProfit) {
+                maxProfit = weekProfit;
+                bestWeek = w + 1;
+            }
+        }
+
+        return "Week " + bestWeek;
     }
 
     public static void main(String[] args) {
