@@ -15,10 +15,9 @@ public class Main {
     // ======== REQUIRED METHOD LOAD DATA (Students fill this) ========
     public static void loadData() {
         for (int m=0; m<MONTHS; m++){
-            BufferedReader reader = null;
             try {
                 String fileName = "Data_Files/" + months[m] + ".txt";
-                 reader = new BufferedReader(new FileReader(fileName));
+                 BufferedReader reader = new BufferedReader(new FileReader(fileName));
                  String line;
 
                 while ((line = reader.readLine()) != null){
@@ -252,6 +251,7 @@ public class Main {
     public static String compareTwoCommodities(String c1, String c2) { 
         int commNum1 = -1;
         int commNum2 = -1;
+
         for (int c=0; c<COMMS; c++){
             if (commodities[c].equals(c1)){
                 commNum1 = c;
@@ -289,13 +289,13 @@ public class Main {
         int bestWeek = 1;
         int maxProfit = -100000000;
 
-        for (int w = 0; w < 4; w++) {
+        for (int w=0; w<4; w++) {
             int weekProfit = 0;
             int startDay = w * 7;
             int endDay = startDay + 7;
 
-            for (int d = startDay; d < endDay; d++) {
-                for (int c = 0; c < COMMS; c++) {
+            for (int d=startDay; d<endDay; d++) {
+                for (int c=0; c<COMMS; c++) {
                     weekProfit += profits[month][d][c];
                 }
             }
@@ -305,7 +305,6 @@ public class Main {
                 bestWeek = w + 1;
             }
         }
-
         return "Week " + bestWeek;
     }
 
