@@ -1,5 +1,6 @@
 // Main.java — Students version
 import java.io.*;
+import java.nio.file.Paths;
 import java.util.*;
 
 public class Main {
@@ -15,13 +16,15 @@ public class Main {
     // ======== REQUIRED METHOD LOAD DATA (Students fill this) ========
     public static void loadData() {
         for (int m=0; m<MONTHS; m++){
+            Scanner reader = null;
             try {
                 String fileName = "Data_Files/" + months[m] + ".txt";
-                 BufferedReader reader = new BufferedReader(new FileReader(fileName));
-                 String line;
+                 reader = new Scanner(Paths.get(fileName));
 
-                while ((line = reader.readLine()) != null){
+                while (reader.hasNextLine()){
+                    String line = reader.nextLine();
                     String[] parts = line.split(",");
+
                     if (parts.length != 3) continue;
 
                     int day = Integer.parseInt(parts[0]);
@@ -45,6 +48,10 @@ public class Main {
 
             } catch (Exception e){
                 return;
+            } finally {
+                if (reader != null){
+                    reader.close();
+                }
             }
         }
     }
