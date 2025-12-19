@@ -20,18 +20,16 @@ public class Main {
             try {
                 String fileName = "Data_Files/" + months[m] + ".txt";
                  reader = new Scanner(Paths.get(fileName));
-
+                 reader.nextLine();
                 while (reader.hasNextLine()){
                     String line = reader.nextLine();
                     String[] parts = line.split(",");
 
-                    if (parts.length != 3) continue;
 
                     int day = Integer.parseInt(parts[0]);
                     String commodity = parts[1];
                     int profit = Integer.parseInt(parts[2]);
 
-                    if (day < 1 || day > DAYS) continue;
 
                     int commIndex = -1;
                     for (int c=0; c<COMMS; c++){
@@ -41,7 +39,6 @@ public class Main {
                         }
                     }
 
-                    if (commIndex == -1) continue;
 
                     profits[m][day - 1][commIndex] = profit;
                 }
