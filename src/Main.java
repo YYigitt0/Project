@@ -93,7 +93,7 @@ public class Main {
     }
 
     public static int commodityProfitInRange(String commodity, int from, int to) {
-        if (from < 1 || to > DAYS || from > to) {
+        if (from < 1 || to < 1 || to > DAYS || from > to) {
             return -99999;
         }
 
