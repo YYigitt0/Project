@@ -40,11 +40,13 @@ public class Main {
                     }
 
 
-                    profits[m][day - 1][commIndex] = profit;
+                    if (day >= 1 && day <= DAYS && commIndex != -1) {
+                        profits[m][day - 1][commIndex] = profit;
+                    }
                 }
 
             } catch (Exception e){
-                return;
+                continue;
             } finally {
                 if (reader != null){
                     reader.close();
